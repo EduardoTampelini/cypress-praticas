@@ -8,7 +8,7 @@ describe('teste z-api', function(){
     it('z-api chats', ()=>{
         cy.request({
             method:'GET',
-            url: 'https://api.z-api.io/instances/3B4420C35505608BDC24166F1EEA881D/token/DBDBB00EEE948C19CB042E81/chats',
+            url: Cypress.env('urlChats'),
            header: {
             'Client-Token': 'F9c6f9173c3fa45d0a945fd5274935cdbS'
            }
@@ -20,7 +20,7 @@ describe('teste z-api', function(){
     it('z-api chats 405', ()=>{
         cy.request({
             method:'GET',
-            url: 'https://api.z-api.io/instances/3B4420C35505608BDC24166F1EEA881D/token/DBDBB00EEE948C19CB042E81/send-text',
+            url: Cypress.env('urlEnvio'),
             failOnStatusCode: false
         }).then((resp) => {
            
@@ -30,7 +30,7 @@ describe('teste z-api', function(){
     it('z-api chats sem token', ()=>{
         cy.request({
             method:'GET',
-            url: 'https://api.z-api.io/instances/3B4420C35505608BDC24166F1EEA881D/token/DBDBB00EEE948C19CB042E81/chats',
+            url: Cypress.env('urlChats'),
            
         }).then((resp) => {
            
