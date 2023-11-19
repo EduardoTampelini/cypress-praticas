@@ -14,6 +14,10 @@ describe('teste kigi', function(){
     cy.get('.bottom > .ng-isolate-scope > .send-button > .text-container').click({force: true})
      
  });
+ function justNumbers(text) {
+    var numbers = text.replace(/[^0-9]/g,'');
+    return Number(numbers);
+}
  Cypress.on('uncaught:exception', (err, runnable) => {
      
      return false
@@ -26,7 +30,7 @@ describe('teste kigi', function(){
      cy.get(':nth-child(3) > :nth-child(8) > .flex > .ng-isolate-scope > .mbg-dropdown-wrapper > .dropdown > .dropdown-menu > :nth-child(2) > a').click({force: true})
      cy.get('[style="background: rgb(245, 245, 245);"] > :nth-child(5) > .stock-info').invoke('text').then(($vlr) =>{
         
-        Cypress.env('QtdEstoque',  $vlr.charAt(1))
+        Cypress.env('QtdEstoque', justNumbers($vlr))
         cy.log(Cypress.env('QtdEstoque'))
 
      })
@@ -59,7 +63,7 @@ describe('teste kigi', function(){
      cy.get(':nth-child(3) > :nth-child(8) > .flex > .ng-isolate-scope > .mbg-dropdown-wrapper > .dropdown > .title-option > svg').click({force: true})
      cy.get(':nth-child(3) > :nth-child(8) > .flex > .ng-isolate-scope > .mbg-dropdown-wrapper > .dropdown > .dropdown-menu > :nth-child(2) > a').click({force: true})
      cy.get('[style="background: rgb(245, 245, 245);"] > :nth-child(5) > .stock-info').invoke('text').then(($vlr)=>{
-        expect( Number($vlr.charAt(1))).to.eq(Number(Cypress.env('QtdEstoque'))+1)
+        expect(justNumbers($vlr)).to.eq(Cypress.env('QtdEstoque')+1)
      })
  })
 
