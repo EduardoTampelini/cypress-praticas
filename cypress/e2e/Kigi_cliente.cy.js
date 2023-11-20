@@ -1,5 +1,5 @@
 /// <reference types="cypress"/>
-
+import Cadastro from '../support/pages/cliente/pagina-cliente'
 
 
 describe('teste kigi', function(){
@@ -18,19 +18,13 @@ describe('teste kigi', function(){
        
        return false
      })
-     const clientes = require('../fixtures/cliente.json')
-    clientes.forEach(cliente =>{
+    
         it('cliente', ()=>{
-            cy.wait(13000)
-            cy.get(':nth-child(1) > mb-sm-subcategory.ng-scope > [sm-sub-category=""] > .mg-smsc-container > :nth-child(2) > .ng-scope.ng-isolate-scope > .ng-isolate-scope > a.mb > .mb > .mb-smb-text').click({force: true})
-            cy.get('.btn-create').click({force: true})
-            cy.get('.name > .mbg-input-wrapper > .ng-pristine').type(cliente.nome)
-            cy.get('.mbg-btn-form-wrapper > button').click({force: true})
-            cy.contains('button','Sim').click({force: true})
-            cy.intercept( 'https://api.kigisistemas.com.br/mobiage-api/api/individual').as('valor')
-            cy.wait('@valor').its('response.statusCode').should('eq', 200)
+           //exemplo de teste criado utilizando o Page Object
+            Cadastro.realizarCadastro();
+           
         })
-    })
+    
   
    
   
